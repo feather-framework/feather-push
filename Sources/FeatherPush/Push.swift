@@ -5,19 +5,24 @@
 //  Created by Tibor Bodecs on 2023. 01. 16..
 //
 
-public enum Delivery: String {
+public enum Delivery: String, Sendable {
     case normal
     case silent
 }
 
 public enum Platform: Sendable {
-    case ios
+    case iOS
+    case macOS
+    case tvOS
+    case watchOS
+    case visionOS
+    case safari
     case android
     case web
     case custom(String)
 }
 
-public struct Recipient {
+public struct Recipient: Sendable {
     public let token: String
     public let platform: Platform
 
@@ -30,7 +35,7 @@ public struct Recipient {
     }
 }
 
-public struct Notification {
+public struct Notification: Sendable {
     public let title: String
     public let body: String
     public let userInfo: [String: String]
