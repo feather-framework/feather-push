@@ -1,6 +1,6 @@
 # Feather Push
 
-An abstract push notification service for Feather CMS.
+An abstract push notification component for Feather CMS.
 
 ## Getting started
 

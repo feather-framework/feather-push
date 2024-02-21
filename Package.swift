@@ -8,21 +8,21 @@ let package = Package(
         .iOS(.v16),
         .tvOS(.v16),
         .watchOS(.v9),
+        .visionOS(.v1),
     ],
     products: [
         .library(name: "FeatherPush", targets: ["FeatherPush"]),
         .library(name: "XCTFeatherPush", targets: ["XCTFeatherPush"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/feather-framework/feather-service.git", 
-            .upToNextMinor(from: "0.2.0")
+        .package(url: "https://github.com/feather-framework/feather-component.git",  .upToNextMinor(from: "0.4.0")
         ),
     ],
     targets: [
         .target(
             name: "FeatherPush",
             dependencies: [
-                .product(name: "FeatherService", package: "feather-service")
+                .product(name: "FeatherComponent", package: "feather-component")
             ]
         ),
         .target(
