@@ -27,9 +27,9 @@ public struct PushTestSuiteError: Error {
 
 public struct PushTestSuite {
 
-    let push: PushService
+    let push: PushComponent
 
-    public init(_ push: PushService) {
+    public init(_ push: PushComponent) {
         self.push = push
     }
 
