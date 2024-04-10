@@ -22,10 +22,14 @@ public enum Platform: Sendable {
     case custom(String)
 }
 
+/// push notification recipient
 public struct Recipient: Sendable {
+    /// device token
     public let token: String
+    /// device platform
     public let platform: Platform
 
+    /// init push notification recipient
     public init(
         token: String,
         platform: Platform
@@ -35,12 +39,18 @@ public struct Recipient: Sendable {
     }
 }
 
+/// push notification
 public struct Notification: Sendable {
+    /// title
     public let title: String
+    /// body
     public let body: String
+    /// userInfo
     public let userInfo: [String: String]
+    /// delivery
     public let delivery: Delivery
 
+    /// init push notification
     public init(
         title: String,
         body: String,
