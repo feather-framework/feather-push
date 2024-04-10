@@ -8,10 +8,14 @@
 import Foundation
 import FeatherPush
 
+/// push test suit error
 public struct PushTestSuiteError: Error {
 
+    /// function
     public let function: String
+    /// line
     public let line: Int
+    /// error
     public let error: Error?
 
     init(
@@ -25,14 +29,17 @@ public struct PushTestSuiteError: Error {
     }
 }
 
+/// push test suite
 public struct PushTestSuite {
 
     let push: PushComponent
 
+    /// push test suite init
     public init(_ push: PushComponent) {
         self.push = push
     }
 
+    /// test all push sending
     public func testAll(
         from: String,
         to: String

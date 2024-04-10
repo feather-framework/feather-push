@@ -16,6 +16,7 @@ public enum PushComponentID: ComponentID {
     /// custom push component identifier
     case custom(String)
 
+    ///  rawId
     public var rawId: String {
         switch self {
         case .default:
