@@ -15,7 +15,7 @@ let package = Package(
         .library(name: "XCTFeatherPush", targets: ["XCTFeatherPush"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/feather-framework/feather-component.git",  .upToNextMinor(from: "0.4.0")
+        .package(url: "https://github.com/feather-framework/feather-component.git",  .upToNextMinor(from: "0.5.0")
         ),
     ],
     targets: [

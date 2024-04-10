@@ -12,10 +12,10 @@ public enum PushComponentID: ComponentID {
 
     /// default push component identifier
     case `default`
-    
+
     /// custom push component identifier
     case custom(String)
-    
+
     public var rawId: String {
         switch self {
         case .default:
@@ -42,7 +42,9 @@ public extension ComponentRegistry {
         logger: Logger? = nil
     ) throws -> PushComponent {
         guard let push = try get(id, logger: logger) as? PushComponent else {
-            fatalError("Push component not found, call `addPush()` to register.")
+            fatalError(
+                "Push component not found, call `addPush()` to register."
+            )
         }
         return push
     }
