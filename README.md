@@ -2,11 +2,11 @@
 
 An abstract push notification client for Feather CMS.
 
-[![Release: 1.0.0-beta.1](https://img.shields.io/badge/Release-1%2E0%2E0--beta%2E1-F05138)](https://github.com/feather-framework/feather-push/releases/tag/1.0.0-beta.1)
+[![Release: 1.0.0-beta.2](https://img.shields.io/badge/Release-1%2E0%2E0--beta%2E2-F05138)](https://github.com/feather-framework/feather-push/releases/tag/1.0.0-beta.2)
 
 ## Features
 
-- Topic-based push notification delivery
+- Topic- and device-token-based push notification delivery
 - Silent and normal delivery modes
 - Deep-link and rich notification metadata
 - Badge, sound, and notification collapsing support
@@ -31,7 +31,7 @@ An abstract push notification client for Feather CMS.
 Use Swift Package Manager; add the dependency to your `Package.swift` file:
 
 ```swift
-.package(url: "https://github.com/feather-framework/feather-push", exact: "1.0.0-beta.1"),
+.package(url: "https://github.com/feather-framework/feather-push", exact: "1.0.0-beta.2"),
 ```
 
 Then add `FeatherPush` to your target dependencies:
@@ -46,6 +46,14 @@ Then add `FeatherPush` to your target dependencies:
 
 API documentation is available at the following link.
 
+`PushClient` provides device-token delivery. Providers that support topic
+delivery additionally conform to `TopicPushClient`.
+
+The capabilities are separated because push providers do not all support the
+same targeting model. For example, FCM supports subscribable topics, while
+APNs delivers to device tokens and uses its topic value to identify the
+application rather than a group of subscribers.
+
 ```swift
 let notification = PushNotification(
     title: "New message",
@@ -56,10 +64,25 @@ let notification = PushNotification(
     sound: .default
 )
 
-try await client.send(
-    notification: notification,
-    to: "topic"
-)
+// Works with every PushClient implementation.
+func sendToDevice(using client: some PushClient) async throws {
+    try await client.sendToDevice(
+        notification: notification,
+        deviceToken: "device-registration-token"
+    )
+}
+```
+
+Topic-capable clients can also send to provider-managed topics:
+
+```swift
+// Requires a TopicPushClient implementation, such as FCM.
+func sendToTopic(using client: some TopicPushClient) async throws {
+    try await client.sendToTopic(
+        notification: notification,
+        topic: "messages"
+    )
+}
 ```
 
 > [!WARNING]
