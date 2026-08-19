@@ -49,13 +49,14 @@ struct FeatherPushTests {
             .invalidTopic,
             .invalidDeviceToken,
             .invalidNotification,
+            .unsupportedTarget,
             .unauthorized,
             .rateLimited,
             .unavailable,
             .rejected("provider rejected the request"),
         ]
 
-        #expect(errors.count == 7)
+        #expect(errors.count == 8)
     }
 
 }

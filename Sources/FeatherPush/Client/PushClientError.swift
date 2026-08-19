@@ -14,6 +14,8 @@ public enum PushClientError: Error {
     case invalidDeviceToken
     /// The notification payload is invalid or contains unsupported values.
     case invalidNotification
+    /// The provider does not support the requested target type.
+    case unsupportedTarget
     /// The provider credentials are invalid or the request is unauthorized.
     case unauthorized
     /// The provider temporarily rejected the request because it was rate limited.

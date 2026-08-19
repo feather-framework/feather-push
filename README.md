@@ -46,13 +46,13 @@ Then add `FeatherPush` to your target dependencies:
 
 API documentation is available at the following link.
 
-`PushClient` provides device-token delivery. Providers that support topic
-delivery additionally conform to `TopicPushClient`.
+`PushClient` accepts a single delivery target for every notification.
 
-The capabilities are separated because push providers do not all support the
-same targeting model. For example, FCM supports subscribable topics, while
-APNs delivers to device tokens and uses its topic value to identify the
-application rather than a group of subscribers.
+Providers do not all support the same targeting model. For example, FCM
+supports subscribable topics, while APNs delivers to device tokens and uses
+its topic value to identify the application rather than a group of subscribers.
+An implementation that cannot handle a target should throw
+`PushClientError.unsupportedTarget`.
 
 ```swift
 let notification = PushNotification(
@@ -64,23 +64,22 @@ let notification = PushNotification(
     sound: .default
 )
 
-// Works with every PushClient implementation.
-func sendToDevice(using client: some PushClient) async throws {
-    try await client.sendToDevice(
+// Device-token delivery is supported by every PushClient implementation.
+func sendDeviceNotification(using client: some PushClient) async throws {
+    try await client.send(
         notification: notification,
-        deviceToken: "device-registration-token"
+        to: .deviceToken("device-registration-token")
     )
 }
 ```
 
-Topic-capable clients can also send to provider-managed topics:
+The same interface can target a provider-managed topic:
 
 ```swift
-// Requires a TopicPushClient implementation, such as FCM.
-func sendToTopic(using client: some TopicPushClient) async throws {
-    try await client.sendToTopic(
+func sendTopicNotification(using client: some PushClient) async throws {
+    try await client.send(
         notification: notification,
-        topic: "messages"
+        to: .topic("messages")
     )
 }
 ```

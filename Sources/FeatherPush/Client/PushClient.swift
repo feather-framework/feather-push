@@ -5,22 +5,20 @@
 //  Created by Binary Birds on 2026. 08. 14.
 //
 
-/// A provider-neutral client capable of delivering notifications to devices.
+/// A provider-neutral client capable of delivering notifications to supported targets.
 ///
-/// Providers identify devices differently. The `deviceToken` value must be
-/// supplied in the format expected by the provider implementation.
-///
-/// Implementations may support additional delivery capabilities through more
-/// specialized protocols, such as ``TopicPushClient``.
+/// The target determines how the provider should route the notification. A
+/// provider that does not support a target should throw
+/// ``PushClientError/unsupportedTarget``.
 public protocol PushClient: Sendable {
-    /// Sends a notification to one device.
+    /// Sends a notification to the specified delivery target.
     ///
     /// - Parameters:
     ///   - notification: The notification content and delivery options.
-    ///   - deviceToken: The provider-issued token identifying the device.
+    ///   - target: A device token or provider-managed topic.
     /// - Throws: A ``PushClientError`` when the notification cannot be sent.
-    func sendToDevice(
+    func send(
         notification: PushNotification,
-        deviceToken: String
+        to target: PushDeliveryTarget
     ) async throws(PushClientError)
 }
