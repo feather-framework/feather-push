@@ -5,10 +5,10 @@
 //  Created by Binary Birds on 2026. 08. 13.
 //
 
-/// The delivery priority of a push notification.
+/// The requested presentation mode for a push notification.
 public enum Delivery: String, Sendable {
-    /// Delivers the notification normally.
+    /// Delivers a notification that may be presented to the user.
     case normal
-    /// Delivers the notification without presenting an alert.
+    /// Delivers notification data without requesting a visible alert.
     case silent
 }

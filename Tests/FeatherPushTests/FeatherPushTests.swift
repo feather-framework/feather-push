@@ -47,13 +47,16 @@ struct FeatherPushTests {
     func clientErrorsExposeProviderNeutralCases() {
         let errors: [PushClientError] = [
             .invalidTopic,
+            .invalidDeviceToken,
             .invalidNotification,
+            .unsupportedTarget,
             .unauthorized,
             .rateLimited,
             .unavailable,
             .rejected("provider rejected the request"),
         ]
 
-        #expect(errors.count == 6)
+        #expect(errors.count == 8)
     }
+
 }

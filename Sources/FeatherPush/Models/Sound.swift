@@ -5,10 +5,10 @@
 //  Created by Binary Birds on 2026. 08. 13.
 //
 
-/// The sound to play when a notification is presented.
+/// A notification sound requested when a provider presents the notification.
 public enum Sound: Sendable, Equatable {
     /// Use the platform default notification sound.
     case `default`
-    /// Use a bundled, provider-specific sound name.
+    /// Use a sound bundled with the target application.
     case named(String)
 }
