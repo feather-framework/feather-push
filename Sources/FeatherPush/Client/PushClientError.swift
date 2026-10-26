@@ -29,5 +29,5 @@ public enum PushClientError: Error {
     /// An underlying error without a more specific provider-neutral mapping.
     ///
     /// - Parameter error: The underlying provider or transport error.
-    case unknown(Error)
+    case unknown(any Error)
 }
